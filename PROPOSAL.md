@@ -1,4 +1,4 @@
-# Project Name
+# Music Project
 
 
 ## Project Summary
@@ -7,11 +7,11 @@
 
 ## Developers
 
-1. ...
+1. Brett Fritz
 
-2. ...
+2. Casandra Slaughter
 
-3. ...
+3. Reyanna Garibay
 
 ## Installation Instructions
 
@@ -44,4 +44,6 @@
 
 ## Stretch Goals
 
--
+- Make it so that when we search for a song, there is functionality to be able to play the song on the website
+- Make it so that when a user finds a song they like, they can add it to a playlist that they have
+- Make it so that users can filter the search results by things like date released, alphabetically sort, etc.
