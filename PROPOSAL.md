@@ -1,4 +1,4 @@
-# API Music Project Read Me
+# Music Project
 
 ## Description
 
@@ -33,11 +33,11 @@ SO THAT I can serch for a specific keyword to get music results
 
 ## Developers
 
-1. ...cs
+1. Brett Fritz
 
-2. ...bf
+2. Casandra Slaughter
 
-3. ...rg
+3. Reyanna Garibay
 
 ## Installation Instructions
 
@@ -77,3 +77,6 @@ make it play music
 ## Acceptance Criteria
 
 
+- Make it so that when we search for a song, there is functionality to be able to play the song on the website
+- Make it so that when a user finds a song they like, they can add it to a playlist that they have
+- Make it so that users can filter the search results by things like date released, alphabetically sort, etc.
