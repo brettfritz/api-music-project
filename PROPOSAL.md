@@ -3,7 +3,7 @@
 
 ## Project Summary
 
-...
+... 
 
 ## Developers
 
@@ -35,7 +35,8 @@
 
 ## APIs
 
-- 
+- Spotify API
+- Giphy API
 
 ## MVP (Minimum Viable Product)
 
