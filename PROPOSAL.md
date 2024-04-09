@@ -26,20 +26,20 @@
 
 ## Tech Stack
 
-- What languages is it written with: 
+- What languages is it written with: HTML, CSS, JavaScript
 
-- What libraries are used: 
+- What libraries are used: Jquery, Tailwind CSS
 
 - Other: 
 
 
 ## APIs
 
--
+- 
 
 ## MVP (Minimum Viable Product)
 
--
+- 
 
 
 ## Stretch Goals
