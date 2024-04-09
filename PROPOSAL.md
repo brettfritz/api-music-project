@@ -50,16 +50,16 @@ SO THAT I can serch for a specific keyword to get music results
 
 ## Tech Stack
 
-- What languages is it written with: 
+- What languages is it written with: HTML, CSS, JavaScript
 
-- What libraries are used: 
+- What libraries are used: Jquery, Tailwind CSS
 
 - Other: 
 
 
 ## APIs
 
--
+- 
 
 ## MVP (Minimum Viable Product)
 
