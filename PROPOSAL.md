@@ -50,23 +50,26 @@ SO THAT I can serch for a specific keyword to get music results
 
 ## Tech Stack
 
-- What languages is it written with: 
+- What languages is it written with: HTML, CSS, JavaScript
 
-- What libraries are used: 
+- What libraries are used: Jquery, Tailwind CSS
 
 - Other: 
 
 
 ## APIs
 
--
+- 
 
 ## MVP (Minimum Viable Product)
+
 
 use spotify app to make an app tht will allow the user to serch for a
 specific keyword that could be with an activity , feeling, or genre, 
 
 when openig the page i am propted to a button that brings up a modal for the user to imput keyword then the results will display o the page 
+
+
 
 
 ## Stretch Goals
