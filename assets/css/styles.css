@@ -6,3 +6,38 @@
     border-radius: 5px;
     /* color: #fff;
     background-color: #3498db; */
+
+    header {
+        background-color:blue;
+        padding: 20px;
+        text-align: center;
+      }
+      header.h1{
+        font-style: cursive;
+      }
+
+      /* .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    } */
+    
+    .lightup {
+        font-size: 36px;
+        font-weight: bold;
+        animation: lightUp 2s infinite alternate; 
+    }
+    
+    @keyframes lightUp {
+        from {
+            color: #ff0000; /* Start color */
+            text-shadow: 0 0 10px #ff0000; /* Start text shadow */
+        }
+        to {
+            color: #00ff00; 
+            text-shadow: 0 0 20px purple; 
+        }
+    }
+    
