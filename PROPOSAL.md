@@ -25,11 +25,9 @@ music that matches me
 
 ## Project Summary
 
-...``
 AS A music lover
-I WANT AN music app
-SO THAT I can serch for a specific keyword to get music results 
-```
+I WANT a music app
+SO THAT I can search for a specific keyword to get music results 
 
 ## Developers
 
@@ -59,7 +57,8 @@ SO THAT I can serch for a specific keyword to get music results
 
 ## APIs
 
-- 
+- Spotify API
+- Giphy API
 
 ## MVP (Minimum Viable Product)
 
@@ -68,15 +67,7 @@ specific keyword that could be with an activity , feeling, or genre,
 
 when openig the page i am propted to a button that brings up a modal for the user to imput keyword then the results will display o the page 
 
-
 ## Stretch Goals
-make it prettier 
-make it play music 
-
-
-## Acceptance Criteria
-
-
 - Make it so that when we search for a song, there is functionality to be able to play the song on the website
 - Make it so that when a user finds a song they like, they can add it to a playlist that they have
 - Make it so that users can filter the search results by things like date released, alphabetically sort, etc.
