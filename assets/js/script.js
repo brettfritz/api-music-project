@@ -11,7 +11,14 @@
 //   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
 
 
+(document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
+  const modal = $trigger.dataset.target;
+  const $target = document.getElementById(modal);
 
+  $trigger.addEventListener('click', () => {
+    openModal($target);
+  });
+});
 
 
 
@@ -33,31 +40,39 @@
 
 // const data = await response.json();
 // }
- 
+// $(document).ready(function() {
+//   const $modal = $('#myModal');
+//   const $openModal = $('#openModal');
 
-$(document).ready(() => {
-  const $modal = $('#myModal');
-  const $openModal = $('#openModal');
-  const $closeModal = $('#closeModal');
+//   // Function to open the modal
+//   function openModal() {
+//       $modal.addClass('is-active');
+//   }
 
-  $openModal.on('click', () => {
-      $modal.addClass('is-active');
-  });
+//   // Event listener for opening the modal
+//   $openModal.click(function() {
+//       openModal();
+//   });
+// });
 
-  $closeModal.on('click', () => {
-      $modal.removeClass('is-active');
-  });
 
-  $modal.on('click', event => {
-      if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
-          $modal.removeClass('is-active');
-      }
-  });
 
-  $(document).on('keydown', event => {
-      if (event.key === 'Escape' && $modal.hasClass('is-active')) {
-          $modal.removeClass('is-active');
-      }
-  });
-});
+//   // Event listener for closing the modal
+//   $closeModal.click(() => {
+//       closeModal();
+//   });
 
+//   // Event listener for clicking on modal background or close button to close modal
+//   $modal.on('click', event => {
+//       if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
+//           closeModal();
+//       }
+//   });
+
+//   // Event listener for pressing Escape key to close modal
+//   $(document).on('keydown', event => {
+//       if (event.key === 'Escape' && $modal.hasClass('is-active')) {
+//           closeModal();
+//       }
+//   });
+// });
