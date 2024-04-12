@@ -1,81 +1,177 @@
-$(document).ready(function () {
-  function openModal(event) {
-    const target = $(event.currentTarget).data('target');
-    $(`#${target}`).addClass('is-active');
-  }
+const clientId = "dcb4fb0557f74ae289fb0ebaab01d07d";
+const clientSecret = "8fb7747e40784aa890919eac0f2969c8";
+const redirectURI = "";
+const code = undefined;
+const authOptions = {
+    method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+        },
+        body: 'grant_type=client_credentials',
+        json: true,
+};
 
-  $('.js-modal-trigger').click(openModal);
+let accessToken;
 
-  $('.js-modal-close').click(function () {
-    $('.modal').removeClass('is-active');
-  });
+function fetchAccessToken() {
+    // Make a request to spotifys token endpoint to get an access token
+    fetch('https://accounts.spotify.com/api/token', authOptions)
+    // If the response is not good, throw an error, if it is good, return json
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to obtain access token');
+            }
+            return response.json();
+        })
+        // console log the access token??
+        .then(data => {
+            accessToken = data.access_token;
+            console.log('Access Token: ', accessToken)
+        })
+        // console log the access token??
+        .then((data) => console.log(data));
+}
 
-  $(document).keydown(function (event) {
-    if (event.key === "Escape") {
-      closeAllModals();
+
+function search() {
+    // grabs input from search bar/form
+    const query = $('#searchInput').val();
+    // if there is no access token, stop
+    if (!accessToken) {
+        console.error('Access token is not available')
+        return;
     }
+    // actual fetch
+    fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
+        headers: {
+            Authorization: 'Bearer ${accessToken}'
+        }
+    })
+    
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Failed to fetch search results');
+        }
+        return response.json();
+    })
+
+    .then(data => {
+        displaySearchResults(data);
+    })
+
+    .catch(error => {
+        console.error('Error:', error.message);
+    })
+}
+
+
+
+$(document).ready(() => {
+  const modal = $('#myModal');
+  const openModal = $('#openModal');
+  const closeModal = $('#closeModal');
+
+  $openModal.on('click', () => {
+      modal.addClass('is-active');
   });
 
-  function closeAllModals() {
-    $('.modal').removeClass('is-active');
-  }
+  $closeModal.on('click', () => {
+      modal.removeClass('is-active');
+  });
+
+  $modal.on('click', event => {
+      if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
+          modal.removeClass('is-active');
+      }
+  });
+
+  $(document).on('keydown', event => {
+      if (event.key === 'Escape' && $modal.hasClass('is-active')) {
+          modal.removeClass('is-active');
+      }
+  });
 });
 
-
-const apiKey = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
-fetchMusicNotesGIF(apiKey);
-
-function fetchMusicNotesGIF(apiKey) {
-  const query = 'music notes';
-  const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}`;
-
-  fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-          const gifUrl = data.data[0].images.original.url;
-          displayMusicNotesGIF(gifUrl);
-      })
-      .catch(error => console.error('Error fetching GIF:', error));
-}
-
-function displayMusicNotesGIF(url) {
-  const musicNotesDiv = document.getElementById('musicNotes');
-  if (!musicNotesDiv) {
-    const newDiv = document.createElement('div');
-    newDiv.id = 'musicNotes';
-    document.body.appendChild(newDiv);
-    musicNotesDiv = newDiv;
+$(document).ready(function () {
+    function openModal(event) {
+      const target = $(event.currentTarget).data('target');
+      $(`#${target}`).addClass('is-active');
+    }
+  
+    $('.js-modal-trigger').click(openModal);
+  
+    $('.js-modal-close').click(function () {
+      $('.modal').removeClass('is-active');
+    });
+  
+    $(document).keydown(function (event) {
+      if (event.key === "Escape") {
+        closeAllModals();
+      }
+    });
+  
+    function closeAllModals() {
+      $('.modal').removeClass('is-active');
+    }
+  });
+  
+  
+  const apiKey = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
+  fetchMusicNotesGIF(apiKey);
+  
+  function fetchMusicNotesGIF(apiKey) {
+    const query = 'music notes';
+    const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}`;
+  
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const gifUrl = data.data[0].images.original.url;
+            displayMusicNotesGIF(gifUrl);
+        })
+        .catch(error => console.error('Error fetching GIF:', error));
   }
-
-  const img = document.createElement('img');
-  img.src = url;
-  img.alt = 'Music Notes GIF';
-  musicNotesDiv.appendChild(img);
-}
-
-
-
-// spotify client id: dcb4fb0557f74ae289fb0ebaab01d07d
-
-// spotify client secret: 8fb7747e40784aa890919eac0f2969c8
-
-// // http GET https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n \
-// //   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
-
-
-//   curl --request GET \
-//   'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V' \
-//    --header "Authorization: Bearer NgCXRK...MzYjw"
-
-// The following code implements the getProfile() function which performs the API call to the Get Current User's Profile endpoint to retrieve the user profile related information:
-
-// async function getProfile(accessToken) {
-// let accessToken = localStorage.getItem('access_token');
-
-// const response = await fetch('https://api.spotify.com/v1/me', {
-//   headers: {
-//     Authorization: 'Bearer ' + accessToken
-//   }
-// });
-
-// const data = await response.json();
+  
+  function displayMusicNotesGIF(url) {
+    const musicNotesDiv = document.getElementById('musicNotes');
+    if (!musicNotesDiv) {
+      const newDiv = document.createElement('div');
+      newDiv.id = 'musicNotes';
+      document.body.appendChild(newDiv);
+      musicNotesDiv = newDiv;
+    }
+  
+    const img = document.createElement('img');
+    img.src = url;
+    img.alt = 'Music Notes GIF';
+    musicNotesDiv.appendChild(img);
+  }
+  
+  
+  
+  // spotify client id: dcb4fb0557f74ae289fb0ebaab01d07d
+  
+  // spotify client secret: 8fb7747e40784aa890919eac0f2969c8
+  
+  // // http GET https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n \
+  // //   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
+  
+  
+  //   curl --request GET \
+  //   'https://api.spotify.com/v1/tracks/2TpxZ7JUBn3uw46aR7qd6V' \
+  //    --header "Authorization: Bearer NgCXRK...MzYjw"
+  
+  // The following code implements the getProfile() function which performs the API call to the Get Current User's Profile endpoint to retrieve the user profile related information:
+  
+  // async function getProfile(accessToken) {
+  // let accessToken = localStorage.getItem('access_token');
+  
+  // const response = await fetch('https://api.spotify.com/v1/me', {
+  //   headers: {
+  //     Authorization: 'Bearer ' + accessToken
+  //   }
+  // });
+  
+  // const data = await response.json();
+  
