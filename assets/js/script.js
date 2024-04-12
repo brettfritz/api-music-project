@@ -1,26 +1,66 @@
+$(document).ready(function () {
+  function openModal(event) {
+    const target = $(event.currentTarget).data('target');
+    $(`#${target}`).addClass('is-active');
+  }
 
-// Add event listener for modal
-// Function to fetch music data
+  $('.js-modal-trigger').click(openModal);
+
+  $('.js-modal-close').click(function () {
+    $('.modal').removeClass('is-active');
+  });
+
+  $(document).keydown(function (event) {
+    if (event.key === "Escape") {
+      closeAllModals();
+    }
+  });
+
+  function closeAllModals() {
+    $('.modal').removeClass('is-active');
+  }
+});
+
+
+const apiKey = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
+fetchMusicNotesGIF(apiKey);
+
+function fetchMusicNotesGIF(apiKey) {
+  const query = 'music notes';
+  const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}`;
+
+  fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+          const gifUrl = data.data[0].images.original.url;
+          displayMusicNotesGIF(gifUrl);
+      })
+      .catch(error => console.error('Error fetching GIF:', error));
+}
+
+function displayMusicNotesGIF(url) {
+  const musicNotesDiv = document.getElementById('musicNotes');
+  if (!musicNotesDiv) {
+    const newDiv = document.createElement('div');
+    newDiv.id = 'musicNotes';
+    document.body.appendChild(newDiv);
+    musicNotesDiv = newDiv;
+  }
+
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = 'Music Notes GIF';
+  musicNotesDiv.appendChild(img);
+}
+
 
 
 // spotify client id: dcb4fb0557f74ae289fb0ebaab01d07d
 
 // spotify client secret: 8fb7747e40784aa890919eac0f2969c8
 
-// http GET https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n \
-//   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
-
-
-(document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-  const modal = $trigger.dataset.target;
-  const $target = document.getElementById(modal);
-
-  $trigger.addEventListener('click', () => {
-    openModal($target);
-  });
-});
-
-
+// // http GET https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n \
+// //   Authorization:'Bearer 1POdFZRZbvb...qqillRxMr2z'
 
 
 //   curl --request GET \
@@ -39,40 +79,3 @@
 // });
 
 // const data = await response.json();
-// }
-// $(document).ready(function() {
-//   const $modal = $('#myModal');
-//   const $openModal = $('#openModal');
-
-//   // Function to open the modal
-//   function openModal() {
-//       $modal.addClass('is-active');
-//   }
-
-//   // Event listener for opening the modal
-//   $openModal.click(function() {
-//       openModal();
-//   });
-// });
-
-
-
-//   // Event listener for closing the modal
-//   $closeModal.click(() => {
-//       closeModal();
-//   });
-
-//   // Event listener for clicking on modal background or close button to close modal
-//   $modal.on('click', event => {
-//       if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
-//           closeModal();
-//       }
-//   });
-
-//   // Event listener for pressing Escape key to close modal
-//   $(document).on('keydown', event => {
-//       if (event.key === 'Escape' && $modal.hasClass('is-active')) {
-//           closeModal();
-//       }
-//   });
-// });
