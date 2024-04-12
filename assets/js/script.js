@@ -29,12 +29,12 @@ function fetchAccessToken() {
             accessToken = data.access_token;
             console.log('Access Token: ', accessToken)
         })
-        // console log the access token??
-        .then((data) => console.log(data));
 }
 
 
 function search() {
+
+    fetchAccessToken();
     // grabs input from search bar/form
     const query = $('#searchInput').val();
     // if there is no access token, stop
@@ -72,15 +72,15 @@ $(document).ready(() => {
   const openModal = $('#openModal');
   const closeModal = $('#closeModal');
 
-  $openModal.on('click', () => {
+  openModal.on('click', () => {
       modal.addClass('is-active');
   });
 
-  $closeModal.on('click', () => {
+  closeModal.on('click', () => {
       modal.removeClass('is-active');
   });
 
-  $modal.on('click', event => {
+  modal.on('click', event => {
       if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
           modal.removeClass('is-active');
       }
@@ -117,14 +117,14 @@ $(document).ready(function () {
   });
   
   
-  const apiKey = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
-  fetchMusicNotesGIF(apiKey);
+  const apiKeyMusicNote = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
+  fetchMusicNotesGIF(apiKeyMusicNote);
   
-  function fetchMusicNotesGIF(apiKey) {
+  function fetchMusicNotesGIF(apiKeyMusicNote) {
     const query = 'music notes';
-    const apiUrl = `https://api.giphy.com/v1/gifs/search?api_key=${apiKey}&q=${query}`;
+    const apiUrlMusicNote = `https://api.giphy.com/v1/gifs/search?api_key=${apiKeyMusicNote}&q=${query}`;
   
-    fetch(apiUrl)
+    fetch(apiUrlMusicNote)
         .then(response => response.json())
         .then(data => {
             const gifUrl = data.data[0].images.original.url;
