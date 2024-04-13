@@ -1,121 +1,117 @@
-let clientId = "dcb4fb0557f74ae289fb0ebaab01d07d";
+ $(document).ready(() => {
+    $("#openModal").on("click", function(e) {
+      e.preventDefault();
+      const target = $(this).data('target');
+      $(`#${target}`).addClass('is-active');
+    });
+});
+    
+
+const clientId = "dcb4fb0557f74ae289fb0ebaab01d07d";
 const clientSecret = "8fb7747e40784aa890919eac0f2969c8";
 const redirectURI = "";
 const code = undefined;
 const authOptions = {
     method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
-        },
-        body: 'grant_type=client_credentials',
-        json: true,
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': 'Basic ' + btoa(clientId + ':' + clientSecret)
+    },
+    body: 'grant_type=client_credentials',
+    json: true,
 };
 
 let accessToken;
 
 function fetchAccessToken() {
-    // Make a request to spotifys token endpoint to get an access token
-    fetch('https://accounts.spotify.com/api/token', authOptions)
-    // If the response is not good, throw an error, if it is good, return json
+    return fetch('https://accounts.spotify.com/api/token', authOptions)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Failed to obtain access token');
             }
             return response.json();
         })
-        // console log the access token??
         .then(data => {
             accessToken = data.access_token;
-            console.log('Access Token: ', accessToken)
+            console.log('Access Token:', accessToken);
         })
+        .catch(error => {
+            console.error('Error fetching access token:', error);
+        });
 }
-
 
 function search() {
+    fetchAccessToken()
+        .then(() => {
+            const query = $('#searchInput').val();
+            if (!accessToken) {
+                console.error('Access token is not available');
+                return;
+            }
+            fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch search results');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displaySearchResults(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error.message);
+                });
+        });
+}
 
-    fetchAccessToken();
-    // grabs input from search bar/form
-    const query = $('#searchInput').val();
-    // if there is no access token, stop
-    if (!accessToken) {
-        console.error('Access token is not available')
-        return;
-    }
-    // actual fetch
-    fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
-        headers: {
-            Authorization: 'Bearer ${accessToken}'
-        }
-    })
-    
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Failed to fetch search results');
-        }
-        return response.json();
-    })
+document.getElementById('searchButton').addEventListener('click', search);
 
-    .then(data => {
-        displaySearchResults(data);
-    })
+function displaySearchResults(data) {
+    const searchResults = data.tracks.items;
 
-    .catch(error => {
-        console.error('Error:', error.message);
-    })
+    const resultsContainer = document.getElementById('results-container');
+    resultsContainer.innerHTML = '';
+
+    searchResults.forEach(track => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        const cardContent = document.createElement('div');
+        cardContent.classList.add('card-content');
+
+        const trackName = document.createElement('p');
+        trackName.textContent = track.name;
+
+        const artistName = document.createElement('p');
+        artistName.textContent = track.artists[0].name;
+
+        const albumCover = document.createElement('img');
+        albumCover.src = track.album.images[0].url;
+        albumCover.alt = 'Album Cover';
+
+        cardContent.appendChild(trackName);
+        cardContent.appendChild(artistName);
+        card.appendChild(albumCover);
+        card.appendChild(cardContent);
+
+        resultsContainer.appendChild(card);
+    });
 }
 
 
 
-$(document).ready(() => {
-  const modal = $('#myModal');
-  const openModal = $('#openModal');
-  const closeModal = $('#closeModal');
 
-  openModal.on('click', () => {
-      modal.addClass('is-active');
-  });
 
-  closeModal.on('click', () => {
-      modal.removeClass('is-active');
-  });
 
-  modal.on('click', event => {
-      if ($(event.target).hasClass('modal-background') || $(event.target).hasClass('modal-close')) {
-          modal.removeClass('is-active');
-      }
-  });
 
-  $(document).on('keydown', event => {
-      if (event.key === 'Escape' && $modal.hasClass('is-active')) {
-          modal.removeClass('is-active');
-      }
-  });
-});
 
-$(document).ready(function () {
-    function openModal(event) {
-      const target = $(event.currentTarget).data('target');
-      $(`#${target}`).addClass('is-active');
-    }
-  
-    $('.js-modal-trigger').click(openModal);
-  
-    $('.js-modal-close').click(function () {
-      $('.modal').removeClass('is-active');
-    });
-  
-    $(document).keydown(function (event) {
-      if (event.key === "Escape") {
-        closeAllModals();
-      }
-    });
-  
-    function closeAllModals() {
-      $('.modal').removeClass('is-active');
-    }
-  });
-  
+
+
+
   
   const apiKeyMusicNote = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
   fetchMusicNotesGIF(apiKeyMusicNote);
