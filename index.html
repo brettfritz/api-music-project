@@ -16,41 +16,13 @@
 </head>
 
 <body>
-  <header>
-    <h1 class="lightup"> MUSIC FOR YOUR MOOD
-    </h1>
-  </header>
-  <button class="button is-info" id="openModal">Open Modal</button>
-  <div class="container">
-    <div id="musicNotes"></div>
-</div>
-  <button class="button is-info js-modal-trigger" data-target="myModal">
-   Click to listen
-  </button>
-  <div class="modal" id="myModal">
-      <div class="modal-background"></div>
-      <div class="modal-content">
-          <div class="box">
-              <p>Mjhvsdfbjkdbfgjke</p>
-              <div class="field">
-                  <label class="label">Name</label>
-                  <div class="control">
-                      <input class="input" type="text" placeholder="Text input">
-                  </div>
-              </div>
-          </div>
-          <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
-      </div>
-  </div>
   <section class="hero is-success is-fullheight">
     <!-- Hero head: will stick at the top -->
     <div class="hero-head">
       <header class="navbar">
         <div class="container">
           <div class="navbar-brand">
-            <a class="navbar-item">
-              <img src="https://bulma.io/assets/images/bulma-type-white.png" alt="Logo" />
-            </a>
+            <h1 class="lightup"> MUSIC FOR YOUR MOOD </h1>
             <span class="navbar-burger" data-target="navbarMenuHeroC">
               <span></span>
               <span></span>
@@ -76,66 +48,52 @@
         </div>
       </header>
     </div>
-  
-    <!-- Hero content: will be in the middle -->
-    <div class="hero-body">
-      <div class="container has-text-centered">
-        <div class="container is-fluid">
+    <section class="hero is-fullheight is-primary">
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <div id="musicNotes"></div>
           <div class="notification is-primary">
             <form id="form" method="post">
-              <h2 class="subtitle is-2" id="form-h2">Discover New Music</h2>
-                <label for="song-search">Type Something!</label>
-                <input class="input" id="song-search" type="text" placeholder="Mood, genre, artist, etc..." />
-              <button class="button is-dark" id="search-btn">Find A Song</button>
+                  <button id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A
+                    Song</button>
+              </div>
             </form>
           </div>
-        </div> 
-      </div>
-    </div>
-  
-    <!-- Hero footer: will stick at the bottom -->
-    <div class="hero-foot">
-      <nav class="tabs is-boxed is-fullwidth">
-        <div class="container">
-          <ul>
-            <li class="is-active"><a>Overview</a></li>
-            <li><a>Modifiers</a></li>
-            <li><a>Grid</a></li>
-            <li><a>Elements</a></li>
-            <li><a>Components</a></li>
-            <li><a>Layout</a></li>
-          </ul>
         </div>
-      </nav>
-    </div>
-  </section>
-<body>
-  <header>
-    <h1 class="lightup"> MUSIC FOR YOUR MOOD
-    </h1>
-  </header>  
-  <div class="container">
-    <div id="musicNotes"></div>
-</div>
-  <button class="button is-info js-modal-trigger" data-target="myModal">
-   Click to listen
-  </button>
-<div class="modal" id="myModal">
-    <div class="modal-background"></div>
-    <div class="modalcontent">
-            <div class="field">
-                <label class="label">Name</label>
+        <div class="modal" id="myModal">
+          <div class="modalcontent">
+              <p>Discover new music</p>
+              <div class="field">
                 <div class="control">
-                    <input class="input" type="text" placeholder="Text input">
+                  <input class="input" type="text" placeholder="Text input">
+                  <button id="searchButton" class="button is-info">Search</button>
                 </div>
+              </div>
             </div>
+            <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
+          </div>
         </div>
-        <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
-    </div>
-</div>
+      </div>
+      <div id="results-container"></div>
+      <div class="hero-foot">
+        <nav class="tabs is-boxed is-fullwidth">
+          <div class="container">
+            <ul>
+              <li class="is-active"><a>Overview</a></li>
+              <li><a>Modifiers</a></li>
+              <li><a>Grid</a></li>
+              <li><a>Elements</a></li>
+              <li><a>Components</a></li>
+              <li><a>Layout</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </section>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src=" ./assets/js/script.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src=" ./assets/js/script.js"></script>
 
 </body>
 

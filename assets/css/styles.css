@@ -1,37 +1,15 @@
-
-#musicNotes {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: -1; 
-}
-
-#musicNotes img {
-    display: block;
-    width: 100%;
-    height: auto;
-} 
 body {
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: blue;
-    padding: 20px;
-    text-align: center;
-    position: relative; 
-    z-index: 1; 
 }
 
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; 
-    z-index: 0; 
+    position: relative;
+    z-index: 0;
 }
-
 
 .button.is-info {
     background-color: #3498db;
@@ -41,64 +19,90 @@ header {
     padding: 10px 20px;
 }
 
+.lightup {
+    font-size: 36px;
+    font-weight: bold;
+    animation: lightUp 2s infinite alternate;
+}
 
-      header.h1{
-        font-style: cursive;
-      }
+@keyframes lightUp {
+    from {
+        color: #ff0000;
+        text-shadow: 0 0 10px #ff0000;
+    }
+    to {
+        color: #00ff00;
+        text-shadow: 0 0 20px purple;
+    }
+}
 
-    .lightup {
-        font-size: 36px;
-        font-weight: bold;
-        animation: lightUp 2s infinite alternate; 
-    }
-    
-    @keyframes lightUp {
-        from {
-            color: #ff0000; /* Start color */
-            text-shadow: 0 0 10px #ff0000; /* Start text shadow */
-        }
-        to {
-            color: #00ff00; 
-            text-shadow: 0 0 20px purple; 
-        }
-    }
-    .modalcontent {
-      
-        border-radius: 10px;
-        padding: 20px;
-    }
-    
-    .field {
-        margin-bottom: 20px;
-    }
-    
-    .label {
-        font-weight: bold;
-    }
-    
-    .input {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 8px 10px;
-        width: 100%;
-    }
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 400px;
+    background-color: #ffffff;
+}
 
-    .modal {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 300px; 
-        height: 200px; 
-        background-color: #ffffff;
-    }
-    
-    .modal-close {
-        /* background-color: transparent; */
-        border: none;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        font-size: 20px;
-        color: #aaa;
-    }
+.modalclose {
+    border: none;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #aaa;
+}
+
+
+#musicNotes {
+    margin-top: 20px; 
+    border-radius: 10px;
+    overflow: hidden;
+    z-index: 1;
+    background-position: center; 
+    justify-content: center;
+    align-items: center;
+}
+
+.modalcontent {
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.notification {
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.field {
+    margin-bottom: 20px;
+}
+
+.label {
+    font-weight: bold;
+}
+
+.card {
+    display: inline-block;
+    width: 200px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content p {
+    margin: 5px 0;
+}
