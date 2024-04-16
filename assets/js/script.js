@@ -1,4 +1,4 @@
- $(document).ready(() => {
+$(document).ready(() => {
     $("#openModal").on("click", function(e) {
       e.preventDefault();
       const target = $(this).data('target');
