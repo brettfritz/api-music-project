@@ -43,13 +43,11 @@ function fetchAccessToken() {
         });
 }
 
-
-
 function search() {
     fetchAccessToken()
         .then(() => {
             // grabs input from search bar/form
-            const query = $('#searchInput').val();
+            const query = $('#search-input').val();
             // if there is no access token, stop
             if (!accessToken) {
                 console.error('Access token is not available');
@@ -58,23 +56,22 @@ function search() {
             // actual fetch
             fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
                 headers: {
-                    Authorization: 'Bearer ${accessToken}'
+                    Authorization: 'Bearer ' + accessToken 
                 }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch search results');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    accessToken = data.access_token;
-                    console.log('Access Token:', accessToken);
-                    displaySearResults(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching access token:', error.message);
-                });
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Add console log to check the fetched data
+                displaySearchResults(data);
+            })
+            .catch(error => {
+                console.error('Error fetching access token:', error.message);
+            });
     });
 }
 
