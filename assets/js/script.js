@@ -24,25 +24,25 @@ const authOptions = {
 let accessToken;
 
 function fetchAccessToken() {
-      // Make a request to Spotify's token endpoint to get an access token
-      return fetch('https://accounts.spotify.com/api/token', authOptions)
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Failed to obtain access token');
-              }
-              return response.json();
-          })
-          .then(data => {
-              accessToken = data.access_token;
-              console.log('Access Token:', accessToken);
-              resolve(); // Resolve the promise when access token is retrieved
-          })
-          .catch(error => {
-              console.error('Error:', error.message);
-              reject(error); // Reject the promise if there's an error
-          });
-  });
+    // Return a promise that resolves with the access token or rejects with an error
+    return fetch('https://accounts.spotify.com/api/token', authOptions)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to obtain access token');
+            }
+            return response.json();
+        })
+        .then(data => {
+            accessToken = data.access_token;
+            console.log('Access Token:', accessToken);
+            return accessToken; // Return the access token
+        })
+        .catch(error => {
+            console.error('Error:', error.message);
+            throw error; // Throw the error to propagate it to the next catch block
+        });
 }
+
 
 
 function search() {
