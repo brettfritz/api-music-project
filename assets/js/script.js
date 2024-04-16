@@ -1,4 +1,4 @@
- $(document).ready(() => {
+$(document).ready(() => {
     $("#openModal").on("click", function(e) {
       e.preventDefault();
       const target = $(this).data('target');
@@ -29,7 +29,6 @@ const authOptions = {
 
 let accessToken;
 
-
 function fetchAccessToken() {
     // Return a promise that resolves with the access token or rejects with an error
     return fetch('https://accounts.spotify.com/api/token', authOptions)
@@ -46,7 +45,7 @@ function fetchAccessToken() {
         })
         .catch(error => {
             console.error('Error:', error.message);
-            throw error; 
+            throw error; // Throw the error to propagate it to the next catch block
         });
 }
 let recentSearches = JSON.parse(localStorage.getItem('recent-searches')) || [];
@@ -91,35 +90,32 @@ function search() {
             console.log(query);
             // if there is no access token, stop
             if (!accessToken) {
-            console.error('Access token is not available');
+                console.error('Access token is not available');
                 return;
             }
             // actual fetch
             fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
                 headers: {
-                    Authorization: 'Bearer ${accessToken}'
+                    Authorization: 'Bearer ' + accessToken 
                 }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Failed to fetch search results');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    accessToken = data.access_token;
-                    console.log('Access Token:', accessToken);
-                    displaySearResults(data);
-                })
-                .catch(error => {
-                    console.error('Error fetching access token:', error.message);
-                });
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch search results');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data); // Add console log to check the fetched data
+                displaySearchResults(data);
+            })
+            .catch(error => {
+                console.error('Error fetching access token:', error.message);
+            });
     });
 }
 
 document.getElementById('searchButton').addEventListener('click', search);
-
-
 
 function displaySearchResults(data) {
     const searchResults = data.tracks.items;
@@ -127,6 +123,7 @@ function displaySearchResults(data) {
     const resultsContainer = document.getElementById('results-container');
     resultsContainer.innerHTML = '';
 
+    searchResults.forEach(track => {
         const card = document.createElement('div');
         card.classList.add('card');
 
@@ -142,13 +139,15 @@ function displaySearchResults(data) {
         const albumCover = document.createElement('img');
         albumCover.src = track.album.images[0].url;
         albumCover.alt = 'Album Cover';
+
         cardContent.appendChild(trackName);
         cardContent.appendChild(artistName);
         card.appendChild(albumCover);
         card.appendChild(cardContent);
-        resultsContainer.appendChild(card);
-    }
 
+        resultsContainer.appendChild(card);
+    });
+}
   
 const apiKeyMusicNote = 'Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF';
 fetchMusicNotesGIF(apiKeyMusicNote);
