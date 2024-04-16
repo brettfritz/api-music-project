@@ -42,12 +42,46 @@ function fetchAccessToken() {
             throw error; // Throw the error to propagate it to the next catch block
         });
 }
+let recentSearches = JSON.parse(localStorage.getItem('recent-searches')) || [];
+
+function addToLocalStorage(query) {
+    if (!recentSearches.includes(query)) {
+        recentSearches.unshift(query); // Add query to the beginning of the array
+        // Limit recent searches to 5 items
+        if (recentSearches.length > 5) {
+            recentSearches.pop(); // Remove the last item if there are more than 5
+        }
+        localStorage.setItem('recent-searches', JSON.stringify(recentSearches)); // Store recent searches in localStorage
+        displayRecentSearches(); // Update UI with recent searches
+    }
+}
+
+function displayRecentSearches() {
+    const recentSearchesContainer = document.getElementById('recent-searches');
+    recentSearchesContainer.innerHTML = ''; // Clear previous items
+
+    recentSearches.forEach(query => {
+        const searchItem = document.createElement('div');
+        searchItem.classList.add('recent-search');
+        searchItem.textContent = query;
+        searchItem.addEventListener('click', () => {
+            // Trigger search function with the clicked query
+            $('#search-input').val(query); // Update search input value
+            search(); // Trigger search function
+        });
+        recentSearchesContainer.appendChild(searchItem);
+    });
+}
+
+displayRecentSearches();
 
 function search() {
     fetchAccessToken()
         .then(() => {
             // grabs input from search bar/form
             const query = $('#search-input').val();
+            addToLocalStorage(query);
+            console.log(query);
             // if there is no access token, stop
             if (!accessToken) {
                 console.error('Access token is not available');
@@ -139,4 +173,3 @@ function displayMusicNotesGIF(url) {
   img.alt = 'Music Notes GIF';
   musicNotesDiv.appendChild(img);
 }
-  
