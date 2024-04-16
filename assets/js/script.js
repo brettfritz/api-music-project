@@ -42,17 +42,47 @@ function fetchAccessToken() {
             console.error('Error:', error.message);
             throw error; 
         });
-};
+}
+let recentSearches = JSON.parse(localStorage.getItem('recent-searches')) || [];
 
-const search = () => {
-    // grabs input from search bar/form
-    const query = $('#searchInput').val();
-    
-    // Fetch access token 
+function addToLocalStorage(query) {
+    if (!recentSearches.includes(query)) {
+        recentSearches.unshift(query); // Add query to the beginning of the array
+        // Limit recent searches to 5 items
+        if (recentSearches.length > 5) {
+            recentSearches.pop(); // Remove the last item if there are more than 5
+        }
+        localStorage.setItem('recent-searches', JSON.stringify(recentSearches)); // Store recent searches in localStorage
+        displayRecentSearches(); // Update UI with recent searches
+    }
+}
+
+function displayRecentSearches() {
+    const recentSearchesContainer = document.getElementById('recent-searches');
+    recentSearchesContainer.innerHTML = ''; // Clear previous items
+
+    recentSearches.forEach(query => {
+        const searchItem = document.createElement('div');
+        searchItem.classList.add('recent-search');
+        searchItem.textContent = query;
+        searchItem.addEventListener('click', () => {
+            // Trigger search function with the clicked query
+            $('#search-input').val(query); // Update search input value
+            search(); // Trigger search function
+        });
+        recentSearchesContainer.appendChild(searchItem);
+    });
+}
+
+displayRecentSearches();
+
+function search() {
     fetchAccessToken()
         .then(() => {
             // grabs input from search bar/form
-            const query = $('#searchInput').val();
+            const query = $('#search-input').val();
+            addToLocalStorage(query);
+            console.log(query);
             // if there is no access token, stop
             if (!accessToken) {
             console.error('Access token is not available');
@@ -61,25 +91,25 @@ const search = () => {
             // actual fetch
             fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
                 headers: {
-                    Authorization: `Bearer ${accessToken}`
+                    Authorization: 'Bearer ${accessToken}'
                 }
-            });
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Failed to fetch search results');
-            }
-            return response.json();
-        })
-        .then(data => {
-            accessToken = data.access_token;
-            console.log('Access Token:', accessToken);
-            displaySearResults(data);
-        })
-        .catch(error => {
-            console.error('Error fetching access token:', error.message);
-        });
-};
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to fetch search results');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    accessToken = data.access_token;
+                    console.log('Access Token:', accessToken);
+                    displaySearResults(data);
+                })
+                .catch(error => {
+                    console.error('Error fetching access token:', error.message);
+                });
+    });
+}
 
 document.getElementById('searchButton').addEventListener('click', search);
 
@@ -144,4 +174,3 @@ function displayMusicNotesGIF(url) {
   img.alt = 'Music Notes GIF';
   musicNotesDiv.appendChild(img);
 }
-  
