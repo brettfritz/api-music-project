@@ -4,8 +4,14 @@
       const target = $(this).data('target');
       $(`#${target}`).addClass('is-active');
     });
+
+    $(".modal-background, .delete").on("click", function(event) {
+        event.preventDefault();
+        $(".modal").removeClass('is-active');
+    });
 });
-    
+
+
 
 const clientId = "dcb4fb0557f74ae289fb0ebaab01d07d";
 const clientSecret = "8fb7747e40784aa890919eac0f2969c8";
