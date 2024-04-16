@@ -48,7 +48,9 @@
         </div>
       </header>
     </div>
+
     <section class="hero is-fullheight is-primary">
+
       <div class="hero-body">
         <div class="container has-text-centered">
           <div id="musicNotes"></div>
@@ -60,19 +62,27 @@
             </form>
           </div>
         </div>
+
         <div class="modal" id="myModal">
-          <div class="modalcontent">
-              <p>Discover new music</p>
-              <div class="field">
-                <div class="control">
-                  <input class="search-input" type="text" placeholder="Text input">
-                  <button id="searchButton" class="button is-info">Search</button>
+          <div class="modal-background"></div>
+            <div class="modal-card" id="modalcontent">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Discover new music</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                <div class="field">
+                  <label class="label">Type Something!</label>
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Mood, genre, artist...">
+                    <button class="button is-primary is-dark" id="searchButton">Search</button>
+                  </div>
                 </div>
-              </div>
+              </section>
             </div>
-            <button class="modal-close is-large" aria-label="close" id="closeModal"></button>
           </div>
         </div>
+
       </div>
       <div id="results-container"></div>
       <div class="hero-foot">
