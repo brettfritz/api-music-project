@@ -33,14 +33,13 @@
           <div id="navbarMenuHeroC" class="navbar-menu">
             <div class="navbar-end">
               <a class="navbar-item is-active"> Home </a>
-              <a class="navbar-item"> Examples </a>
-              <a class="navbar-item"> Documentation </a>
+              <a class="navbar-item">Holding This Spot For Cassie's 2nd Page </a>
               <span class="navbar-item">
-                <a class="button is-success is-inverted">
+                <a href="https://developer.spotify.com/" class="button is-success is-inverted">
+                  <p>Powered By:</p>
                   <span class="icon">
-                    <i class="fab fa-github"></i>
+                    <img src="assets/images/spotify-icon.png" />
                   </span>
-                  <span>Download</span>
                 </a>
               </span>
             </div>
@@ -59,25 +58,27 @@
           <div id="musicNotes"></div>
           <div class="notification is-primary">
             <form id="form" method="post">
-                  <button id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A
-                    Song</button>
+                  <button 
+                    id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
+                  </button>
               </div>
             </form>
           </div>
         </div>
 
+        <!-- Modal Form -->
         <div class="modal" id="myModal">
           <div class="modal-background"></div>
             <div class="modal-card" id="modalcontent">
               <header class="modal-card-head">
-                <p class="modal-card-title">Discover new music</p>
+                <p class="modal-card-title">Discover New Music</p>
                 <button class="delete" aria-label="close"></button>
               </header>
               <section class="modal-card-body">
-                <div class="field">
+                <div class="field" id="modal-form">
                   <label class="label">Type Something!</label>
                   <div class="control">
-                    <input id="search-input" type="text" placeholder="Mood, genre, artist...">
+                    <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
                     <button class="button is-primary is-dark" id="searchButton">Search</button>
                   </div>
                 </div>
@@ -85,19 +86,25 @@
             </div>
           </div>
         </div>
-
       </div>
+
+      <!-- Results Container -->
       <div id="results-container"></div>
       <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">
             <ul>
-              <li class="is-active"><a>Overview</a></li>
-              <li><a>Modifiers</a></li>
-              <li><a>Grid</a></li>
-              <li><a>Elements</a></li>
-              <li><a>Components</a></li>
-              <li><a>Layout</a></li>
+              <li class="is-active">
+                <a href="https://github.com/brettfritz/api-music-project" class="button is-success is-inverted">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Repo</span>
+                </a>
+              </li>
+              <li><a href="https://github.com/brettfritz"><strong>brettfritz</strong></a></li>
+              <li><a href="https://github.com/slaughtercasandra787"><strong>slaughtercasandra787</strong></a></li>
+              <li><a href="https://github.com/ReyG18"><strong>ReyG18</strong></a></li>
             </ul>
           </div>
         </nav>
