@@ -1,13 +1,43 @@
 $(document).ready(() => {
+  // function to close modal
+  function closeModal() {
+    $("#myModal").removeClass("is-active");
+  }
+
   $("#openModal").on("click", function (e) {
     e.preventDefault();
     const target = $(this).data("target");
     $(`#${target}`).addClass("is-active");
+
+    // Clear the search field when modal is opened
+    $("#search-input").val("");
   });
 
   $(".modal-background, .delete").on("click", function (event) {
     event.preventDefault();
-    $(".modal").removeClass("is-active");
+    closeModal();
+  });
+
+  // Event listener for form submission
+  $("#searchButton").on("click", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const searchTerm = $("#search-input").val().trim();
+    if (searchTerm === "") {
+      // Display alert if search term is empty
+      alert("Please fill in the search field.");
+    } else {
+      closeModal(); // Close the modal after search button click
+      search();
+    }
+  });
+
+   // Event listener for pressing Enter key in the search input field
+  $("#search-input").on("keyup", function(event) {
+    if (event.keyCode === 13) {
+      // Trigger search button click when Enter key is pressed
+      $("#searchButton").click();
+    }
   });
 });
 
