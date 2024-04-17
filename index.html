@@ -17,7 +17,6 @@
 
 <body>
   <section class="hero is-success is-fullheight">
-    <!-- Hero head: will stick at the top -->
     <div class="hero-head">
       <header class="navbar">
         <div class="container">
@@ -32,8 +31,6 @@
           </div>
           <div id="navbarMenuHeroC" class="navbar-menu">
             <div class="navbar-end">
-              <a class="navbar-item is-active"> Home </a>
-              <a class="navbar-item">Holding This Spot For Cassie's 2nd Page </a>
               <span class="navbar-item">
                 <a href="https://developer.spotify.com/" class="button is-success is-inverted">
                   <p>Powered By:</p>
@@ -47,10 +44,9 @@
         </div>
       </header>
     </div>
-
     <section class="hero is-fullheight is-primary">
       <aside>
-        <div id="recent-searches">
+        <div id="recent-searches" class="search-container">
         </div>
       </aside>
       <div class="hero-body">
@@ -58,37 +54,32 @@
           <div id="musicNotes"></div>
           <div class="notification is-primary">
             <form id="form" method="post">
-                  <button 
-                    id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
-                  </button>
-              </div>
-            </form>
+              <button id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
+              </button>
           </div>
-        </div>
-
-        <!-- Modal Form -->
-        <div class="modal" id="myModal">
-          <div class="modal-background"></div>
-            <div class="modal-card" id="modalcontent">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Discover New Music</p>
-                <button class="delete" aria-label="close"></button>
-              </header>
-              <section class="modal-card-body">
-                <div class="field" id="modal-form">
-                  <label class="label">Type Something!</label>
-                  <div class="control">
-                    <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
-                    <button class="button is-primary is-dark" id="searchButton">Search</button>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+          </form>
         </div>
       </div>
-
-      <!-- Results Container -->
+      <div class="modal" id="myModal">
+        <div class="modal-background"></div>
+        <div class="modal-card" id="modalcontent">
+          <header class="modal-card-head">
+            <p class="modal-card-title">Discover New Music</p>
+            <button class="delete" aria-label="close"></button>
+          </header>
+          <section class="modal-card-body">
+            <div class="field" id="modal-form">
+              <label class="label">Type Something!</label>
+              <div class="control">
+                <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
+                <button class="button is-primary is-dark" id="searchButton">Search</button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+      </div>
+      </div>
       <div id="results-container"></div>
       <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
