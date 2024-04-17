@@ -92,24 +92,36 @@ function addToLocalStorage(query) {
   }
 }
 
-function displayRecentSearches() {
-  const recentSearchesContainer = document.getElementById("recent-searches");
-  recentSearchesContainer.innerHTML = ""; // Clear previous items
 
-  recentSearches.forEach((query) => {
-    const searchItem = document.createElement("div");
-    searchItem.classList.add("recent-search");
-    searchItem.textContent = query;
-    searchItem.addEventListener("click", () => {
-      // Trigger search function with the clicked query
-      $("#search-input").val(query); // Update search input value
-      search(); // Trigger search function
+
+function displayRecentSearches() {
+    const recentSearchesContainer = document.getElementById('recent-searches');
+    recentSearchesContainer.innerHTML = '';
+
+    recentSearches.forEach(query => {
+        const searchItem = document.createElement('div');
+        searchItem.classList.add('recent-search');
+        searchItem.textContent = query;
+        searchItem.addEventListener('click', () => {
+            // Redirect to another page with the clicked query as a query parameter
+            window.location.href = "index2.html";
+        });
+        recentSearchesContainer.appendChild(searchItem);
     });
-    recentSearchesContainer.appendChild(searchItem);
-  });
 }
 
 displayRecentSearches();
+
+
+
+//             // Trigger search function with the clicked query
+//             $('#search-input').val(query); // Update search input value
+//             search(); // Trigger search function
+//         });
+//         // recentSearchesContainer.appendChild(searchItem);
+//     });
+// }
+
 
 function search() {
   fetchAccessToken().then(() => {
