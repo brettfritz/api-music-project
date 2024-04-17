@@ -4,6 +4,7 @@ $(document).ready(() => {
     $("#myModal").removeClass("is-active");
   }
 
+  // function to open modal
   $("#openModal").on("click", function (e) {
     e.preventDefault();
     const target = $(this).data("target");
@@ -13,6 +14,7 @@ $(document).ready(() => {
     $("#search-input").val("");
   });
 
+  // closes the modal if we  click outside of it
   $(".modal-background, .delete").on("click", function (event) {
     event.preventDefault();
     closeModal();
@@ -24,8 +26,8 @@ $(document).ready(() => {
 
     const searchTerm = $("#search-input").val().trim();
     if (searchTerm === "") {
-      // Display alert if search term is empty
-      alert("Please fill in the search field.");
+      // Display alert if the search input field is empty
+      alert("Type a word, any word. Try Pizza!");
     } else {
       closeModal(); // Close the modal after search button click
       search();
