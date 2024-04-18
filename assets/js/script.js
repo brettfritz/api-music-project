@@ -14,6 +14,10 @@ $(document).ready(() => {
   }
 
   // function to close modal with slideUp animation
+  $("#results-container").empty(); // Clear search results container on page load
+  localStorage.removeItem("recent-searches");
+
+  // function to close modal
   function closeModal() {
     $("#myModal").slideUp(() => {
       $("#myModal").removeClass("is-active");
@@ -46,8 +50,8 @@ $(document).ready(() => {
     }
   });
 
-   // Event listener for pressing Enter key in the search input field
-  $("#search-input").on("keyup", function(event) {
+  // Event listener for pressing Enter key in the search input field
+  $("#search-input").on("keyup", function (event) {
     if (event.keyCode === 13) {
       // Trigger search button click when Enter key is pressed
       $("#searchButton").click();
@@ -105,48 +109,42 @@ function addToLocalStorage(query) {
 }
 
 
-
 function displayRecentSearches() {
-    const recentSearchesContainer = document.getElementById('recent-searches');
-    recentSearchesContainer.innerHTML = '';
+  const recentSearchesContainer = document.getElementById('recent-searches');
+  recentSearchesContainer.innerHTML = '';
 
-    recentSearches.forEach(query => {
-        const searchItem = document.createElement('div');
-        searchItem.classList.add('recent-search');
-        searchItem.textContent = query;
-        searchItem.addEventListener('click', () => {
-            // Redirect to another page with the clicked query as a query parameter
-            window.location.href = "index2.html";
-        });
-        recentSearchesContainer.appendChild(searchItem);
+  recentSearches.forEach(query => {
+    const searchItem = document.createElement('div');
+    searchItem.classList.add('column', 'is-half');
+    
+    const button = document.createElement('button');
+    button.classList.add('button', 'search-history-btn');
+    button.textContent = query;
+    button.addEventListener('click', () => {
+      window.location.href = "index2.html";
+      const encodedQuery = encodeURIComponent(query);
+      window.location.href = `index2.html?query=${encodedQuery}`;
     });
+
+    searchItem.appendChild(button);
+    recentSearchesContainer.appendChild(searchItem);
+  });
 }
+
 
 displayRecentSearches();
 
 
-
-//             // Trigger search function with the clicked query
-//             $('#search-input').val(query); // Update search input value
-//             search(); // Trigger search function
-//         });
-//         // recentSearchesContainer.appendChild(searchItem);
-//     });
-// }
-
-
 function search() {
   fetchAccessToken().then(() => {
-    // grabs input from search bar/form
-    const query = $("#search-input").val();
-    addToLocalStorage(query);
+    const query = $("#search-input").val().trim();
+    addToLocalStorage(query); // Store the search query
     console.log(query);
     // if there is no access token, stop
     if (!accessToken) {
       console.error("Access token is not available");
       return;
     }
-    // actual fetch
     fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
       headers: {
         Authorization: "Bearer " + accessToken,
