@@ -1,3 +1,5 @@
+$('#flashMessage').hide();
+
 $(document).ready(() => {
   // function to close modal
   function closeModal() {
@@ -26,8 +28,8 @@ $(document).ready(() => {
 
     const searchTerm = $("#search-input").val().trim();
     if (searchTerm === "") {
-      // Display alert if the search input field is empty
-      alert("Type a word, any word. Try Pizza!");
+      // Display flash message if the search input field is empty
+      $('#flashMessage').appendTo('body').slideDown(1000).delay(3000).slideUp();
     } else {
       closeModal(); // Close the modal after search button click
       search();
