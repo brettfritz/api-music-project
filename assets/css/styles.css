@@ -7,6 +7,7 @@ body {
 .container {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: relative; 
 }
 
@@ -63,13 +64,15 @@ body {
 }
 
 #musicNotes {
-    margin-top: 10px;
-    border-radius: 10px;
+    margin-top: 30px;
 }
 
 .notification {
-    margin-top: 20px;
-    position: relative;
+    margin-top: 10px;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%);
 }
 
 .card {
