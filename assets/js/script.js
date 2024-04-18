@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+=======
 $('#flashMessage').hide();
+>>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
 
 $(document).ready(() => {
+  $("#results-container").empty(); // Clear search results container on page load
+  localStorage.removeItem("recent-searches");
+
   // function to close modal
   function closeModal() {
     $("#myModal").removeClass("is-active");
@@ -28,16 +34,21 @@ $(document).ready(() => {
 
     const searchTerm = $("#search-input").val().trim();
     if (searchTerm === "") {
+<<<<<<< HEAD
+      // Display alert if the search input field is empty
+      alert("Type a word");
+=======
       // Display flash message if the search input field is empty
       $('#flashMessage').appendTo('body').slideDown(1000).delay(3000).slideUp();
+>>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
     } else {
       closeModal(); // Close the modal after search button click
       search();
     }
   });
 
-   // Event listener for pressing Enter key in the search input field
-  $("#search-input").on("keyup", function(event) {
+  // Event listener for pressing Enter key in the search input field
+  $("#search-input").on("keyup", function (event) {
     if (event.keyCode === 13) {
       // Trigger search button click when Enter key is pressed
       $("#searchButton").click();
@@ -95,48 +106,43 @@ function addToLocalStorage(query) {
 }
 
 
-
 function displayRecentSearches() {
-    const recentSearchesContainer = document.getElementById('recent-searches');
-    recentSearchesContainer.innerHTML = '';
+  const recentSearchesContainer = document.getElementById('recent-searches');
+  recentSearchesContainer.innerHTML = '';
 
-    recentSearches.forEach(query => {
-        const searchItem = document.createElement('div');
-        searchItem.classList.add('recent-search');
-        searchItem.textContent = query;
-        searchItem.addEventListener('click', () => {
-            // Redirect to another page with the clicked query as a query parameter
-            window.location.href = "index2.html";
-        });
-        recentSearchesContainer.appendChild(searchItem);
+  recentSearches.forEach(query => {
+    const words = query.split(" ");
+    words.forEach(word => {
+      const searchItem = document.createElement('div');
+      searchItem.classList.add('column', 'is-half');
+      const button = document.createElement('button');
+      button.classList.add('button', 'search-history-btn');
+      button.textContent = word;
+      button.addEventListener('click', () => {
+        window.location = "index2.html"
+        // const query = encodeURIComponent(word); 
+        // window.location.href = `index2.html?query=${query}`;
+      });
+
+      searchItem.appendChild(button);
+      recentSearchesContainer.appendChild(searchItem);
     });
+  });
 }
 
 displayRecentSearches();
 
 
-
-//             // Trigger search function with the clicked query
-//             $('#search-input').val(query); // Update search input value
-//             search(); // Trigger search function
-//         });
-//         // recentSearchesContainer.appendChild(searchItem);
-//     });
-// }
-
-
 function search() {
   fetchAccessToken().then(() => {
-    // grabs input from search bar/form
-    const query = $("#search-input").val();
-    addToLocalStorage(query);
+    const query = $("#search-input").val().trim();
+    addToLocalStorage(query); // Store the search query
     console.log(query);
     // if there is no access token, stop
     if (!accessToken) {
       console.error("Access token is not available");
       return;
     }
-    // actual fetch
     fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=10`, {
       headers: {
         Authorization: "Bearer " + accessToken,
