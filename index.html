@@ -7,7 +7,9 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
     integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" /> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
@@ -55,14 +57,17 @@
           <div class="notification is-primary">
             <form id="form" method="post">
                   <button 
-                    id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
+                    id="openModal" 
+                      class="button is-large is-responsive is-success is-inverted js-modal-trigger" 
+                      data-target="myModal">
+                    <strong>Find A Song</strong>
                   </button>
               </div>
             </form>
           </div>
         </div>
 
-        <!-- Modal Form -->
+        <!-- Modal Form with flash message integration -->
         <div class="modal" id="myModal">
           <div class="modal-background">
             <div class="has-background-danger has-text-dark" id="flashMessage">
@@ -70,16 +75,16 @@
             </div>
           </div>
             <div class="modal-card" id="modalcontent">
-              <header class="modal-card-head">
+              <header class="modal-card-head has-background-success">
                 <p class="modal-card-title">Discover New Music</p>
                 <button class="delete" aria-label="close"></button>
               </header>
-              <section class="modal-card-body">
+              <section class="modal-card-body has-background-black-bis">
                 <div class="field" id="modal-form">
-                  <label class="label">Type Something!</label>
+                  <label class="label has-text-grey-lighter" id="label-text">Type Something!</label>
                   <div class="control">
-                    <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
-                    <button class="button is-primary is-dark" id="searchButton">Search</button>
+                    <input class="input is-normal has-background-white-bis" id="search-input" type="text" placeholder="Mood, genre, artist...">
+                    <button class="button is-medium is-active is-success is-inverted" id="searchButton">Search</button>
                   </div>
                 </div>
               </section>
@@ -88,6 +93,8 @@
         </div>
       </div>
       <div id="results-container"></div>
+      
+      <!-- Footer with Github links to our accs and project repo -->
       <div class="hero-foot">
         <nav class="tabs is-boxed is-fullwidth">
           <div class="container">

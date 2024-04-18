@@ -1,25 +1,36 @@
 $('#flashMessage').hide();
 
 $(document).ready(() => {
+  // Initially hide the modal to make slideDown/slideUp work properly
+  $("#myModal").hide();
+
+  // Function to open modal
+  function openModal() {
+    const target = $("#openModal").data("target");
+    $(`#${target}`).addClass("is-active").slideDown();
+
+    // Clear search field on open
+    $("#search-input").val("");
+  }
+
+  // function to close modal with slideUp animation
   $("#results-container").empty(); // Clear search results container on page load
   localStorage.removeItem("recent-searches");
 
   // function to close modal
   function closeModal() {
-    $("#myModal").removeClass("is-active");
+    $("#myModal").slideUp(() => {
+      $("#myModal").removeClass("is-active");
+    });
   }
 
-  // function to open modal
+  // Event listener for opening modal
   $("#openModal").on("click", function (e) {
     e.preventDefault();
-    const target = $(this).data("target");
-    $(`#${target}`).addClass("is-active");
-
-    // Clear the search field when modal is opened
-    $("#search-input").val("");
+    openModal();
   });
 
-  // closes the modal if we  click outside of it
+  // Event listener to close the modal if we click outside of it
   $(".modal-background, .delete").on("click", function (event) {
     event.preventDefault();
     closeModal();
