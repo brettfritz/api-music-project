@@ -2,7 +2,6 @@ $('#flashMessage').hide();
 
 $(document).ready(() => {
   $("#results-container").empty(); // Clear search results container on page load
-  localStorage.removeItem("recent-searches");
 
   // function to close modal
   function closeModal() {
