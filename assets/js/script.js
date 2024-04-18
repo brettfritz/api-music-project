@@ -15,6 +15,9 @@ $(document).ready(() => {
   }
 
   // function to close modal with slideUp animation
+  $("#results-container").empty(); // Clear search results container on page load
+
+  // function to close modal
   function closeModal() {
     $("#myModal").slideUp(() => {
       $("#myModal").removeClass("is-active");
