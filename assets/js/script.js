@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 $('#flashMessage').hide();
->>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
 
 $(document).ready(() => {
   $("#results-container").empty(); // Clear search results container on page load
@@ -34,13 +31,8 @@ $(document).ready(() => {
 
     const searchTerm = $("#search-input").val().trim();
     if (searchTerm === "") {
-<<<<<<< HEAD
-      // Display alert if the search input field is empty
-      alert("Type a word");
-=======
       // Display flash message if the search input field is empty
       $('#flashMessage').appendTo('body').slideDown(1000).delay(3000).slideUp();
->>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
     } else {
       closeModal(); // Close the modal after search button click
       search();
@@ -111,24 +103,23 @@ function displayRecentSearches() {
   recentSearchesContainer.innerHTML = '';
 
   recentSearches.forEach(query => {
-    const words = query.split(" ");
-    words.forEach(word => {
-      const searchItem = document.createElement('div');
-      searchItem.classList.add('column', 'is-half');
-      const button = document.createElement('button');
-      button.classList.add('button', 'search-history-btn');
-      button.textContent = word;
-      button.addEventListener('click', () => {
-        window.location = "index2.html"
-        // const query = encodeURIComponent(word); 
-        // window.location.href = `index2.html?query=${query}`;
-      });
-
-      searchItem.appendChild(button);
-      recentSearchesContainer.appendChild(searchItem);
+    const searchItem = document.createElement('div');
+    searchItem.classList.add('column', 'is-half');
+    
+    const button = document.createElement('button');
+    button.classList.add('button', 'search-history-btn');
+    button.textContent = query;
+    button.addEventListener('click', () => {
+      window.location.href = "index2.html";
+      const encodedQuery = encodeURIComponent(query);
+      window.location.href = `index2.html?query=${encodedQuery}`;
     });
+
+    searchItem.appendChild(button);
+    recentSearchesContainer.appendChild(searchItem);
   });
 }
+
 
 displayRecentSearches();
 
