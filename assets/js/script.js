@@ -3,8 +3,9 @@ $('#flashMessage').hide();
 $(document).ready(() => {
   // Initially hide the modal to make slideDown/slideUp work properly
   $("#myModal").hide();
+  $("#results-container").empty(); // Clear search results container on page load
 
-  // Function to open modal
+  // Function to open modal with slideDown animation
   function openModal() {
     const target = $("#openModal").data("target");
     $(`#${target}`).addClass("is-active").slideDown();
@@ -106,7 +107,14 @@ function addToLocalStorage(query) {
     displayRecentSearches(); // Update UI with recent searches
   }
 }
-
+// This function will be called in the search function
+// It takes the results-container as the element and scrolls 
+// To the top of the element on submit
+function scrollToResults(element) {
+  $('html, body').animate({
+    scrollTop: element.offset().top
+  }, 1000); // Speed of the scroll in milliseconds
+}
 
 function displayRecentSearches() {
   const recentSearchesContainer = document.getElementById('recent-searches');
@@ -158,6 +166,7 @@ function search() {
       .then((data) => {
         console.log(data); // Add console log to check the fetched data
         displaySearchResults(data);
+        scrollToResults($("#results-container"));
       })
       .catch((error) => {
         console.error("Error fetching access token:", error.message);
@@ -203,8 +212,8 @@ const apiKeyMusicNote = "Ftz45OlejK7c1TotYb8ypOJFkUrrbJzF";
 fetchMusicNotesGIF(apiKeyMusicNote);
 
 function fetchMusicNotesGIF(apiKeyMusicNote) {
-  const query = "music notes";
-  const apiUrlMusicNote = `https://api.giphy.com/v1/gifs/search?api_key=${apiKeyMusicNote}&q=${query}`;
+  const searchQuery = "loop musique sticker";
+  const apiUrlMusicNote = `https://api.giphy.com/v1/gifs/search?api_key=${apiKeyMusicNote}&q=${searchQuery}`;
 
   fetch(apiUrlMusicNote)
     .then((response) => response.json())

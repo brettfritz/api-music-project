@@ -46,25 +46,29 @@
         </div>
       </header>
     </div>
+
+    <!-- Content -->
     <section class="hero is-fullheight is-primary">
+      <!-- Recent Searches Container -->
       <aside>
         <div id="recent-searches" class="search-container">
         </div>
       </aside>
+      
+      <!-- Find A Song with Audio Visualizer -->
       <div class="hero-body">
         <div class="container has-text-centered">
-          <div id="musicNotes"></div>
           <div class="notification is-primary">
             <form id="form" method="post">
-                  <button 
-                    id="openModal" 
-                      class="button is-large is-responsive is-success is-inverted js-modal-trigger" 
-                      data-target="myModal">
-                    <strong>Find A Song</strong>
-                  </button>
-              </div>
+              <button 
+                id="openModal" 
+                  class="button is-large is-responsive is-success is-inverted js-modal-trigger" 
+                  data-target="myModal">
+                <strong>Find A Song</strong>
+              </button>
             </form>
           </div>
+          <div id="musicNotes"></div>
         </div>
 
         <!-- Modal Form with flash message integration -->
