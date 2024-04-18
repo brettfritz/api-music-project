@@ -1,14 +1,16 @@
 
 document.addEventListener("DOMContentLoaded", () => {
-    const recentSearches = JSON.parse(localStorage.getItem("recent-searches")) || [];
-    const lastSearchQuery = recentSearches[0]; // Get the last search query from recent searches
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const query = urlParams.get('query');
 
-    if (lastSearchQuery) {
-        search(lastSearchQuery); // Perform the search using the last query
+    if (query) {
+        search(query); // Perform the search using the query from the URL
     } else {
-        console.log("No recent search query found.");
+        console.log("No query parameter found in the URL.");
     }
 });
+
 
 function search(query) {
     fetchAccessToken().then(() => {
