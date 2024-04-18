@@ -36,6 +36,23 @@ body {
     }
 }
 
+#flashMessage {
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    position: fixed;
+    top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+}
+
+#searchButton {
+    margin-top: 5px;
+}
+
 /* .modal {
     position: fixed;
     top: 50%;
