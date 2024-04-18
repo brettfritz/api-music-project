@@ -15,7 +15,6 @@ $(document).ready(() => {
 
   // function to close modal with slideUp animation
   $("#results-container").empty(); // Clear search results container on page load
-  localStorage.removeItem("recent-searches");
 
   // function to close modal
   function closeModal() {
