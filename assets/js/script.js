@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+$('#flashMessage').hide();
+>>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
 
 $(document).ready(() => {
   $("#results-container").empty(); // Clear search results container on page load
@@ -30,8 +34,13 @@ $(document).ready(() => {
 
     const searchTerm = $("#search-input").val().trim();
     if (searchTerm === "") {
+<<<<<<< HEAD
       // Display alert if the search input field is empty
       alert("Type a word");
+=======
+      // Display flash message if the search input field is empty
+      $('#flashMessage').appendTo('body').slideDown(1000).delay(3000).slideUp();
+>>>>>>> c6c75b0b106c855ab672000a3ca4b99f2828d6b4
     } else {
       closeModal(); // Close the modal after search button click
       search();

@@ -54,31 +54,38 @@
           <div id="musicNotes"></div>
           <div class="notification is-primary">
             <form id="form" method="post">
-              <button id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
-              </button>
-          </div>
-          </form>
-        </div>
-      </div>
-      <div class="modal" id="myModal">
-        <div class="modal-background"></div>
-        <div class="modal-card" id="modalcontent">
-          <header class="modal-card-head">
-            <p class="modal-card-title">Discover New Music</p>
-            <button class="delete" aria-label="close"></button>
-          </header>
-          <section class="modal-card-body">
-            <div class="field" id="modal-form">
-              <label class="label">Type Something!</label>
-              <div class="control">
-                <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
-                <button class="button is-primary is-dark" id="searchButton">Search</button>
+                  <button 
+                    id="openModal" class="button is-dark js-modal-trigger" data-target="myModal">Find A Song
+                  </button>
               </div>
-            </div>
-          </section>
+            </form>
+          </div>
         </div>
-      </div>
-      </div>
+
+        <!-- Modal Form -->
+        <div class="modal" id="myModal">
+          <div class="modal-background">
+            <div class="has-background-danger has-text-dark" id="flashMessage">
+              <strong>Type a word, any word.</strong>
+            </div>
+          </div>
+            <div class="modal-card" id="modalcontent">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Discover New Music</p>
+                <button class="delete" aria-label="close"></button>
+              </header>
+              <section class="modal-card-body">
+                <div class="field" id="modal-form">
+                  <label class="label">Type Something!</label>
+                  <div class="control">
+                    <input class="input is-normal" id="search-input" type="text" placeholder="Mood, genre, artist...">
+                    <button class="button is-primary is-dark" id="searchButton">Search</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
       </div>
       <div id="results-container"></div>
       <div class="hero-foot">
@@ -93,9 +100,30 @@
                   <span>Repo</span>
                 </a>
               </li>
-              <li><a href="https://github.com/brettfritz"><strong>brettfritz</strong></a></li>
-              <li><a href="https://github.com/slaughtercasandra787"><strong>slaughtercasandra787</strong></a></li>
-              <li><a href="https://github.com/ReyG18"><strong>ReyG18</strong></a></li>
+              <li>
+                <a href="https://github.com/brettfritz">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <strong>brettfritz</strong>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/slaughtercasandra787">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <strong>slaughtercasandra787</strong>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/ReyG18">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <strong>ReyG18</strong>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>
